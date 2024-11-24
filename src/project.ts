@@ -10,7 +10,7 @@ function project(p5: P5Lib) {
         gradiant = new gradiants(p5);
     };
     p5.draw = () => {
-        
+        gradiant.render(); // Render gradient background
     };
 }
 
