@@ -1,14 +1,17 @@
 import P5Lib from 'p5';
+import gradiants from './gradiant';
 
-function project(p5: P5Lib): void {
-    p5.setup = (): void => {
-        p5.createCanvas(500, 500);
-    }
+function project(p5: P5Lib) {
+    let gradiant: gradiants;
 
-    p5.draw = (): void => {
-        p5.background(0);
-        p5.ellipse(p5.mouseX, p5.mouseY, 100, 100);
-    }
+    p5.setup = () => {
+        //figure out how to make it adjust to the of the screen dynamically
+        p5.createCanvas(1000, 500);
+        gradiant = new gradiants(p5);
+    };
+    p5.draw = () => {
+        
+    };
 }
 
 new P5Lib(project);
