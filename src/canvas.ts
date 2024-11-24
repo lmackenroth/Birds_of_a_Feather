@@ -1,7 +1,10 @@
 import P5Lib from 'p5';
+import { Project } from './project';
 import gradiants from './gradiant';
 
 function project(p5: P5Lib) {
+    //this will hold all of my bird instances
+    const birds: Project[] = [];
     let gradiant: gradiants;
 
     p5.setup = () => {

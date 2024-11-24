@@ -1,6 +1,6 @@
 import P5Lib from 'p5';
 
-export interface Drawable {
+export interface Project {
     draw(): void;
     move(): void;
 
