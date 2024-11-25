@@ -7,6 +7,6 @@ import { Birds } from './project'; // Import the Birds interface
 export interface colorfulBirds extends Birds {
      //I want to make methods that will eventually randomize the colors of the shapes
 
-     setColors(): void;
+     setColors(r: number, g:number, b: number): void;
 
 }

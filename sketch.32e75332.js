@@ -12,6 +12,52 @@
 
 /***/ }),
 
+/***/ "./src/birdBody.ts":
+/*!*************************!*\
+  !*** ./src/birdBody.ts ***!
+  \*************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   body: () => (/* binding */ body)
+/* harmony export */ });
+class body {
+    constructor(p5) {
+        this.triangles = [];
+        this.p5 = p5;
+        this.fillColor = p5.color(255, 255, 255);
+        this.strokeColor = p5.color(0, 0, 0);
+        console.log('triangles initialized');
+    }
+    draw() {
+        this.p5.stroke(this.strokeColor);
+        this.p5.fill(this.fillColor);
+        this.triangles.forEach((triangle) => {
+            this.p5.triangle(triangle.x1, triangle.y1, triangle.x2, triangle.y2, triangle.x3, triangle.y3);
+        });
+    }
+    move() {
+    }
+    setColors() {
+        this.strokeColor = this.p5.color(this.p5.random(0, 255), this.p5.random(0, 255), this.p5.random(0, 255));
+        this.fillColor = this.p5.color(this.p5.random(0, 255), this.p5.random(0, 255), this.p5.random(0, 255));
+    }
+    AddTriangle() {
+        const x = this.p5.mouseX;
+        const y = this.p5.mouseY;
+        this.triangles.push({
+            x1: x, y1: y - 20,
+            x2: x - 20, y2: y + 20,
+            x3: x + 20, y3: y + 20,
+        });
+    }
+}
+
+
+/***/ }),
+
 /***/ "./src/gradiant.ts":
 /*!*************************!*\
   !*** ./src/gradiant.ts ***!
@@ -133,16 +179,25 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var p5__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! p5 */ "./node_modules/p5/lib/p5.min.js");
 /* harmony import */ var p5__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(p5__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _gradiant__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./gradiant */ "./src/gradiant.ts");
+/* harmony import */ var _birdBody__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./birdBody */ "./src/birdBody.ts");
+
 
 
 function project(p5) {
     let gradiant;
+    let birdBody;
     p5.setup = () => {
         p5.createCanvas(1000, 500);
         gradiant = new _gradiant__WEBPACK_IMPORTED_MODULE_1__["default"](p5);
+        birdBody = new _birdBody__WEBPACK_IMPORTED_MODULE_2__.body(p5);
     };
     p5.draw = () => {
         gradiant.render();
+        birdBody.draw();
+    };
+    p5.mousePressed = () => {
+        birdBody.AddTriangle();
+        birdBody.setColors();
     };
 }
 new (p5__WEBPACK_IMPORTED_MODULE_0___default())(project);
@@ -151,4 +206,4 @@ new (p5__WEBPACK_IMPORTED_MODULE_0___default())(project);
 
 /******/ })()
 ;
-//# sourceMappingURL=sketch.2fdb5676.map
+//# sourceMappingURL=sketch.32e75332.map
