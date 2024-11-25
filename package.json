@@ -7,7 +7,8 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "webpack --mode development",
     "dev": "webpack serve --mode development",
-    "start": "webpack serve"
+    "start": "webpack serve",
+    "deploy": "webpack && gh-pages -d docs/dist"
   },
   "keywords": [],
   "author": "",
@@ -22,6 +23,7 @@
     "@types/connect": "^3.4.38",
     "@types/connect-history-api-fallback": "^1.5.4",
     "css-loader": "^7.1.2",
+    "gh-pages": "^6.2.0",
     "html-webpack-plugin": "^5.6.3",
     "mini-css-extract-plugin": "^2.9.2",
     "ts-loader": "^9.5.1",

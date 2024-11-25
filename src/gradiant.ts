@@ -1,13 +1,13 @@
 //will control the gradiants
 // will make it randomly generated, this might be good to be on a timer, not clicks
 
-import P5Lib from 'p5';
+//import p5 from 'p5';
 export default class gradiants{
     //p5
-    private p5: P5Lib;
+    private p5: any;
 
     //contructor
-    constructor(p5: P5Lib) {
+    constructor(p5: any) {
         //setting p5 const
         this.p5 = p5;
       }

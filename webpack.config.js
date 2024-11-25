@@ -33,7 +33,7 @@ module.exports = {
         new MiniCssExtractPlugin()
     ],
     output: {
-        path: path.resolve(__dirname, 'out/dist'),
+        path: path.resolve(__dirname, 'docs/dist'),
         filename: '[name].[fullhash:8].js',
         sourceMapFilename: '[name].[fullhash:8].map',
         chunkFilename: '[name].[fullhash:8].js',
@@ -41,7 +41,7 @@ module.exports = {
     },
     devServer: {
         static: {
-            directory: path.join(__dirname, 'out/dist')
+            directory: path.join(__dirname, 'docs/dist')
         },
         client: {
             overlay: true

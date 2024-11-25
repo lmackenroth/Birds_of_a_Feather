@@ -1,6 +1,6 @@
 import P5Lib from 'p5';
 
-//this is the model for bird
+//this is the model for 
 export interface Birds {
     draw(): void;
     move(): void;

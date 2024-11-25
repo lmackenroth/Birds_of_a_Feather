@@ -1,6 +1,4 @@
 // changed to make it ES modules
-import p5 from "p5"; // Import p5.js
-import Gradiant from "./gradiant.js"; // Import the Gradiant module
 
 function project(p5) {
     // This will hold all of my bird instances
