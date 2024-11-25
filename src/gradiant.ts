@@ -10,6 +10,7 @@ export default class gradiants{
     constructor(p5: P5Lib) {
         //setting p5 const
         this.p5 = p5;
+        console.log('Gradiant initialized');
       }
 
     //rendor for gradient colors

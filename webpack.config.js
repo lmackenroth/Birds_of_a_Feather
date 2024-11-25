@@ -1,6 +1,6 @@
 const path = require('path');
 
-
+//const CopyPlugin = require('copy-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
@@ -28,9 +28,12 @@ module.exports = {
     },
     plugins: [
         new HtmlWebpackPlugin({
-            template: './src/index.html', // Path to your template (create one if needed)
-            filename: 'index.html',       // Output file
+            title: 'template sketch',
+            inject: 'body'
         }),
+        // new CopyPlugin({
+        //     patterns: [{ from: 'src/favicon.ico', to: 'favicon.ico' }],
+        //   }),
         new MiniCssExtractPlugin()
         
     ],
