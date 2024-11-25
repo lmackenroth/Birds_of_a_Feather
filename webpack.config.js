@@ -1,5 +1,6 @@
 const path = require('path');
 
+
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
@@ -8,13 +9,13 @@ module.exports = {
     entry: {
         sketch: './src/canvas.ts'
     },
-    devtool: 'inline-source-map',
+    devtool: 'source-map',
     module: {
         rules: [
             {
                 test: /\.tsx?$/,
                 use: 'ts-loader',
-                include: /node_modules/
+                exclude: /node_modules/
             },
             {
                 test: /\.css$/i,
@@ -27,10 +28,11 @@ module.exports = {
     },
     plugins: [
         new HtmlWebpackPlugin({
-            title: 'template sketch',
-            inject: 'body'
+            template: './src/index.html', // Path to your template (create one if needed)
+            filename: 'index.html',       // Output file
         }),
         new MiniCssExtractPlugin()
+        
     ],
     output: {
         path: path.resolve(__dirname, 'docs/dist'),
