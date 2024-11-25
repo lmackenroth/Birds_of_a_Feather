@@ -4,8 +4,9 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 module.exports = {
+    
     entry: {
-        sketch: './src/project.ts'
+        sketch: './src/canvas.ts'
     },
     devtool: 'inline-source-map',
     module: {
