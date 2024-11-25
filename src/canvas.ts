@@ -18,12 +18,13 @@ function project(p5: P5Lib) {
     p5.draw = () => {
         gradiant.render(); // Render gradient background
         birdBody.draw();
+        birdBody.setColors()
     };
 
     p5.mousePressed = () => {
         birdBody.AddTriangle();
 
-        birdBody.setColors()
+        
 
     };
 

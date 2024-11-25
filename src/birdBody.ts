@@ -1,4 +1,4 @@
-
+//i need to split this up into more classes, it would be easier to look at I think
 
 import { colorfulBirds } from './bird';
 import P5Lib from 'p5';
@@ -64,11 +64,22 @@ export class body implements colorfulBirds {
     AddTriangle(): void {
         const x = this.p5.mouseX;
         const y = this.p5.mouseY;
+        //i want the birds to "lean" so i am setting an angle
+        const angle = this.p5.radians(30);
+        //to get some size variation!
+        const size = this.p5.random(20, 50);
 
+        //in order to get the angle and sizes, we have to do math
+        const x1 = x; // Top vertex
+        const y1 = y - size;
+
+        const x2 = x - size * this.p5.cos(angle); // Bottom-left vertex
+        const y2 = y + size * this.p5.sin(angle);
+
+        const x3 = x + size * this.p5.cos(angle); // Bottom-right vertex
+        const y3 = y + size * this.p5.sin(angle);
         this.triangles.push({
-            x1: x, y1: y - 20, // Top vertex
-            x2: x - 20, y2: y + 20, // Bottom-left vertex
-            x3: x + 20, y3: y + 20, // Bottom-right vertex
+            x1,x2,x3,y1,y2,y3
         });
 
     }

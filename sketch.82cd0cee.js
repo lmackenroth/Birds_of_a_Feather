@@ -47,10 +47,16 @@ class body {
     AddTriangle() {
         const x = this.p5.mouseX;
         const y = this.p5.mouseY;
+        const angle = this.p5.radians(30);
+        const size = this.p5.random(20, 50);
+        const x1 = x;
+        const y1 = y - size;
+        const x2 = x - size * this.p5.cos(angle);
+        const y2 = y + size * this.p5.sin(angle);
+        const x3 = x + size * this.p5.cos(angle);
+        const y3 = y + size * this.p5.sin(angle);
         this.triangles.push({
-            x1: x, y1: y - 20,
-            x2: x - 20, y2: y + 20,
-            x3: x + 20, y3: y + 20,
+            x1, x2, x3, y1, y2, y3
         });
     }
 }
@@ -194,10 +200,10 @@ function project(p5) {
     p5.draw = () => {
         gradiant.render();
         birdBody.draw();
+        birdBody.setColors();
     };
     p5.mousePressed = () => {
         birdBody.AddTriangle();
-        birdBody.setColors();
     };
 }
 new (p5__WEBPACK_IMPORTED_MODULE_0___default())(project);
@@ -206,4 +212,4 @@ new (p5__WEBPACK_IMPORTED_MODULE_0___default())(project);
 
 /******/ })()
 ;
-//# sourceMappingURL=sketch.32e75332.map
+//# sourceMappingURL=sketch.82cd0cee.map
