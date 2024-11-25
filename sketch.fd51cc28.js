@@ -27,36 +27,36 @@ class body {
     constructor(p5) {
         this.triangles = [];
         this.p5 = p5;
-        this.fillColor = p5.color(255, 255, 255);
-        this.strokeColor = p5.color(0, 0, 0);
         console.log('triangles initialized');
     }
     draw() {
-        this.p5.stroke(this.strokeColor);
-        this.p5.fill(this.fillColor);
         this.triangles.forEach((triangle) => {
+            this.p5.stroke(triangle.strokeColor);
+            this.p5.fill(triangle.fillColor);
             this.p5.triangle(triangle.x1, triangle.y1, triangle.x2, triangle.y2, triangle.x3, triangle.y3);
         });
     }
     move() {
     }
     setColors() {
-        this.strokeColor = this.p5.color(this.p5.random(0, 255), this.p5.random(0, 255), this.p5.random(0, 255));
-        this.fillColor = this.p5.color(this.p5.random(0, 255), this.p5.random(0, 255), this.p5.random(0, 255));
     }
     AddTriangle() {
         const x = this.p5.mouseX;
         const y = this.p5.mouseY;
-        const angle = this.p5.radians(30);
         const size = this.p5.random(20, 50);
-        const x1 = x;
+        const slouch = this.p5.random(-size / 2, size / 2);
+        const x1 = x + slouch;
         const y1 = y - size;
-        const x2 = x - size * this.p5.cos(angle);
-        const y2 = y + size * this.p5.sin(angle);
-        const x3 = x + size * this.p5.cos(angle);
-        const y3 = y + size * this.p5.sin(angle);
+        const x2 = x - size;
+        const y2 = y + size;
+        const x3 = x + size;
+        const y3 = y + size;
+        const fillColor = this.p5.color(this.p5.random(0, 255), this.p5.random(0, 255), this.p5.random(0, 255));
+        const strokeColor = this.p5.color(this.p5.random(0, 255), this.p5.random(0, 255), this.p5.random(0, 255));
         this.triangles.push({
-            x1, x2, x3, y1, y2, y3
+            x1, x2, x3, y1, y2, y3,
+            fillColor,
+            strokeColor,
         });
     }
 }
@@ -200,7 +200,6 @@ function project(p5) {
     p5.draw = () => {
         gradiant.render();
         birdBody.draw();
-        birdBody.setColors();
     };
     p5.mousePressed = () => {
         birdBody.AddTriangle();
@@ -212,4 +211,4 @@ new (p5__WEBPACK_IMPORTED_MODULE_0___default())(project);
 
 /******/ })()
 ;
-//# sourceMappingURL=sketch.82cd0cee.map
+//# sourceMappingURL=sketch.fd51cc28.map
