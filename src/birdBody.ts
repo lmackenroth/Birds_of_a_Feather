@@ -7,8 +7,8 @@ export class body implements colorfulBirds {
     //i need to draw triangles that will essentially act as the birds body
     //I want it to draw the triangle where I click my mouse
     //I want the fill and stroke to be different colors
-    private p5: P5Lib;
-    private triangles: { x1: number; y1: number; x2: number; y2: number; x3: number; y3: number; 
+    public p5: P5Lib;
+    public triangles: { x1: number; y1: number; x2: number; y2: number; x3: number; y3: number; 
         strokeColor: P5Lib.Color;
         fillColor: P5Lib.Color;
       }[] = [];
@@ -54,32 +54,34 @@ export class body implements colorfulBirds {
         const x = this.p5.mouseX;
         const y = this.p5.mouseY;
         //to get some size variation!
-        const size = this.p5.random(20, 50);
+        const size = this.p5.random(20, 10);
         //i want the birds to "lean" so i am setting an angle
-        const slouch = this.p5.random(-size / 2, size / 2);
+        //const slouch = this.p5.random(-size / 2, size / 2);
 
 
 
         //in order to get the leaning and sizes, we have to do math to calculate each vertex
-        const x1 = x + slouch;
+        const x1 = x - size/2;
         const y1 = y - size;
 
-        const x2 = x - size;
+        const x2 = x + size/2;
         const y2 = y + size;
 
-        const x3 = x + size;
+        const x3 = x + 3 * (size/2);
         const y3 = y + size;
 
         const fillColor = this.p5.color(
             this.p5.random(0, 255),
             this.p5.random(0, 255),
-            this.p5.random(0, 255)
+            this.p5.random(0, 255),
+            200
         );
-    
+        
         const strokeColor = this.p5.color(
             this.p5.random(0, 255),
             this.p5.random(0, 255),
-            this.p5.random(0, 255)
+            this.p5.random(0, 255),
+            120
         );
 
         this.triangles.push({

@@ -43,16 +43,15 @@ class body {
     AddTriangle() {
         const x = this.p5.mouseX;
         const y = this.p5.mouseY;
-        const size = this.p5.random(20, 50);
-        const slouch = this.p5.random(-size / 2, size / 2);
-        const x1 = x + slouch;
+        const size = this.p5.random(20, 10);
+        const x1 = x - size / 2;
         const y1 = y - size;
-        const x2 = x - size;
+        const x2 = x + size / 2;
         const y2 = y + size;
-        const x3 = x + size;
+        const x3 = x + 3 * (size / 2);
         const y3 = y + size;
-        const fillColor = this.p5.color(this.p5.random(0, 255), this.p5.random(0, 255), this.p5.random(0, 255));
-        const strokeColor = this.p5.color(this.p5.random(0, 255), this.p5.random(0, 255), this.p5.random(0, 255));
+        const fillColor = this.p5.color(this.p5.random(0, 255), this.p5.random(0, 255), this.p5.random(0, 255), 200);
+        const strokeColor = this.p5.color(this.p5.random(0, 255), this.p5.random(0, 255), this.p5.random(0, 255), 120);
         this.triangles.push({
             x1, x2, x3, y1, y2, y3,
             fillColor,
@@ -211,4 +210,4 @@ new (p5__WEBPACK_IMPORTED_MODULE_0___default())(project);
 
 /******/ })()
 ;
-//# sourceMappingURL=sketch.fd51cc28.map
+//# sourceMappingURL=sketch.cd6d8461.map
