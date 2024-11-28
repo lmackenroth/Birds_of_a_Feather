@@ -12,6 +12,72 @@
 
 /***/ }),
 
+/***/ "./src/beak.ts":
+/*!*********************!*\
+  !*** ./src/beak.ts ***!
+  \*********************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   beak: () => (/* binding */ beak)
+/* harmony export */ });
+/* harmony import */ var _birdBody__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./birdBody */ "./src/birdBody.ts");
+
+class beak extends _birdBody__WEBPACK_IMPORTED_MODULE_0__.body {
+    constructor(p5, birdBody) {
+        super(p5);
+        this.beaks = [];
+        this.p5 = p5;
+        this.birdBody = birdBody;
+        console.log('beaks initialized');
+    }
+    draw() {
+        super.draw();
+        this.beaks.forEach((beak1) => {
+            this.p5.stroke(beak1.strokeColor);
+            this.p5.fill(beak1.fillColor);
+            this.p5.triangle(beak1.x1, beak1.y1, beak1.x2, beak1.y2, beak1.x3, beak1.y3);
+        });
+    }
+    beakTri() {
+    }
+    calculateVertices(x, y) {
+        return {
+            x1: x - 3,
+            y1: y + 1,
+            x2: x - 3,
+            y2: y - 1,
+            x3: x - 4,
+            y3: y
+        };
+    }
+    setColors() {
+        return {
+            fillColor: this.p5.color(this.p5.random(0, 255), this.p5.random(0, 255), this.p5.random(0, 255), 200),
+            strokeColor: this.p5.color(this.p5.random(0, 255), this.p5.random(0, 255), this.p5.random(0, 255), 120)
+        };
+    }
+    AddTriangle() {
+        if (this.birdBody.lastX1 === null || this.birdBody.lastY1 === null) {
+            console.error("Error: lastX1 or lastY1 is null, cannot add triangle.");
+            return;
+        }
+        const x = this.birdBody.lastX1;
+        const y = this.birdBody.lastY1;
+        const { x1, y1, x2, y2, x3, y3 } = this.calculateVertices(x, y);
+        const { fillColor, strokeColor } = this.setColors();
+        this.triangles.push({ x1, y1, x2, y2, x3, y3, fillColor, strokeColor });
+        this.lastX1 = x1;
+        this.lastY1 = y1;
+        console.log(`Triangle added with vertices: (${x1}, ${y1}), (${x2}, ${y2}), (${x3}, ${y3})`);
+    }
+}
+
+
+/***/ }),
+
 /***/ "./src/birdBody.ts":
 /*!*************************!*\
   !*** ./src/birdBody.ts ***!
@@ -236,6 +302,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _gradiant__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./gradiant */ "./src/gradiant.ts");
 /* harmony import */ var _birdBody__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./birdBody */ "./src/birdBody.ts");
 /* harmony import */ var _birdHead__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./birdHead */ "./src/birdHead.ts");
+/* harmony import */ var _beak__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./beak */ "./src/beak.ts");
+
 
 
 
@@ -244,21 +312,25 @@ function project(p5) {
     let gradiant;
     let birdBody;
     let birdHead;
+    let birdBeak;
     p5.setup = () => {
         p5.createCanvas(1000, 500);
         gradiant = new _gradiant__WEBPACK_IMPORTED_MODULE_1__["default"](p5);
         birdBody = new _birdBody__WEBPACK_IMPORTED_MODULE_2__.body(p5);
         birdHead = new _birdHead__WEBPACK_IMPORTED_MODULE_3__.head(p5);
+        birdBeak = new _beak__WEBPACK_IMPORTED_MODULE_4__.beak(p5, birdBody);
     };
     p5.draw = () => {
         gradiant.render();
         birdBody.draw();
         birdHead.draw();
+        birdBeak.draw();
     };
     p5.mousePressed = () => {
         birdBody.AddTriangle();
         if (birdBody.lastX1 !== null && birdBody.lastY1 !== null) {
             birdHead.AddCircle(birdBody.lastX1, birdBody.lastY1);
+            birdBeak.AddTriangle();
         }
         else {
             console.log("Error: No triangle coordinates available for adding a circle.");
@@ -271,4 +343,4 @@ new (p5__WEBPACK_IMPORTED_MODULE_0___default())(project);
 
 /******/ })()
 ;
-//# sourceMappingURL=sketch.23b6293c.map
+//# sourceMappingURL=sketch.d6df8d36.map

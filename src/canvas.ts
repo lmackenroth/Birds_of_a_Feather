@@ -3,6 +3,7 @@ import P5Lib from 'p5';
 import gradiants from './gradiant';
 import { body } from './birdBody';
 import { head } from './birdHead';
+import { beak } from './beak';
 
 function project(p5: P5Lib) {
     //this will hold all of my bird instances
@@ -10,6 +11,7 @@ function project(p5: P5Lib) {
     let gradiant: gradiants;
     let birdBody: body;
     let birdHead: head;
+    let birdBeak: beak;
 
     p5.setup = () => {
         //figure out how to make it adjust to the of the screen dynamically
@@ -17,11 +19,13 @@ function project(p5: P5Lib) {
         gradiant = new gradiants(p5);
         birdBody = new body(p5);
         birdHead = new head(p5);
+        birdBeak = new beak(p5, birdBody);
     };
     p5.draw = () => {
         gradiant.render(); // Render gradient background
         birdBody.draw();
         birdHead.draw();
+        birdBeak.draw();
     };
 
     p5.mousePressed = () => {
@@ -30,9 +34,12 @@ function project(p5: P5Lib) {
         //to the addcircle method
         if (birdBody.lastX1 !== null && birdBody.lastY1 !== null) {//takes in the top vertex of each triangle
             birdHead.AddCircle(birdBody.lastX1, birdBody.lastY1);
+            birdBeak.AddTriangle();
+            
         } else {
             console.log("Error: No triangle coordinates available for adding a circle.");
         }    };
+
 
 }
 

@@ -6,7 +6,7 @@ import P5Lib from 'p5';
 export class head extends body {
     //p5
     //i need to set the veticies here
-    birdBody: any;
+    //birdBody: body;
 
     public circles: { x: number; y: number; strokeColor: P5Lib.Color; fillColor: P5Lib.Color }[] = [];
 
