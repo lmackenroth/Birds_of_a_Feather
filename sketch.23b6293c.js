@@ -26,8 +26,10 @@ __webpack_require__.r(__webpack_exports__);
 class body {
     constructor(p5) {
         this.triangles = [];
+        this.lastX1 = null;
+        this.lastY1 = null;
         this.p5 = p5;
-        console.log('triangles initialized');
+        console.log('Triangles initialized');
     }
     draw() {
         this.triangles.forEach((triangle) => {
@@ -36,27 +38,75 @@ class body {
             this.p5.triangle(triangle.x1, triangle.y1, triangle.x2, triangle.y2, triangle.x3, triangle.y3);
         });
     }
-    move() {
+    calculateVertices(x, y, size) {
+        return {
+            x1: x - size / 2,
+            y1: y - size,
+            x2: x + size / 2,
+            y2: y + size,
+            x3: x + 3 * (size / 2),
+            y3: y + size
+        };
     }
     setColors() {
+        return {
+            fillColor: this.p5.color(this.p5.random(0, 255), this.p5.random(0, 255), this.p5.random(0, 255), 200),
+            strokeColor: this.p5.color(this.p5.random(0, 255), this.p5.random(0, 255), this.p5.random(0, 255), 120)
+        };
     }
     AddTriangle() {
         const x = this.p5.mouseX;
         const y = this.p5.mouseY;
-        const size = this.p5.random(20, 10);
-        const x1 = x - size / 2;
-        const y1 = y - size;
-        const x2 = x + size / 2;
-        const y2 = y + size;
-        const x3 = x + 3 * (size / 2);
-        const y3 = y + size;
+        const size = this.p5.random(5, 10);
+        const { x1, y1, x2, y2, x3, y3 } = this.calculateVertices(x, y, size);
+        const { fillColor, strokeColor } = this.setColors();
+        this.triangles.push({ x1, y1, x2, y2, x3, y3, fillColor, strokeColor });
+        this.lastX1 = x1;
+        this.lastY1 = y1;
+        console.log(`Triangle added with vertices: (${x1}, ${y1}), (${x2}, ${y2}), (${x3}, ${y3})`);
+    }
+    move() {
+    }
+}
+
+
+/***/ }),
+
+/***/ "./src/birdHead.ts":
+/*!*************************!*\
+  !*** ./src/birdHead.ts ***!
+  \*************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   head: () => (/* binding */ head)
+/* harmony export */ });
+/* harmony import */ var _birdBody__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./birdBody */ "./src/birdBody.ts");
+
+class head extends _birdBody__WEBPACK_IMPORTED_MODULE_0__.body {
+    constructor(p5) {
+        super(p5);
+        this.circles = [];
+        this.p5 = p5;
+        console.log('triangles initialized');
+    }
+    draw() {
+        super.draw();
+        this.circles.forEach((circle) => {
+            this.p5.stroke(circle.strokeColor);
+            this.p5.fill(circle.fillColor);
+            this.p5.circle(circle.x, circle.y, 5);
+        });
+    }
+    AddCircle(x, y) {
+        const xCircle = x;
+        const yCircle = y;
         const fillColor = this.p5.color(this.p5.random(0, 255), this.p5.random(0, 255), this.p5.random(0, 255), 200);
         const strokeColor = this.p5.color(this.p5.random(0, 255), this.p5.random(0, 255), this.p5.random(0, 255), 120);
-        this.triangles.push({
-            x1, x2, x3, y1, y2, y3,
-            fillColor,
-            strokeColor,
-        });
+        this.circles.push({ x: xCircle, y: yCircle, fillColor, strokeColor });
+        console.log(`Circle added at (${xCircle}, ${yCircle})`);
     }
 }
 
@@ -185,23 +235,34 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var p5__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(p5__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _gradiant__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./gradiant */ "./src/gradiant.ts");
 /* harmony import */ var _birdBody__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./birdBody */ "./src/birdBody.ts");
+/* harmony import */ var _birdHead__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./birdHead */ "./src/birdHead.ts");
+
 
 
 
 function project(p5) {
     let gradiant;
     let birdBody;
+    let birdHead;
     p5.setup = () => {
         p5.createCanvas(1000, 500);
         gradiant = new _gradiant__WEBPACK_IMPORTED_MODULE_1__["default"](p5);
         birdBody = new _birdBody__WEBPACK_IMPORTED_MODULE_2__.body(p5);
+        birdHead = new _birdHead__WEBPACK_IMPORTED_MODULE_3__.head(p5);
     };
     p5.draw = () => {
         gradiant.render();
         birdBody.draw();
+        birdHead.draw();
     };
     p5.mousePressed = () => {
         birdBody.AddTriangle();
+        if (birdBody.lastX1 !== null && birdBody.lastY1 !== null) {
+            birdHead.AddCircle(birdBody.lastX1, birdBody.lastY1);
+        }
+        else {
+            console.log("Error: No triangle coordinates available for adding a circle.");
+        }
     };
 }
 new (p5__WEBPACK_IMPORTED_MODULE_0___default())(project);
@@ -210,4 +271,4 @@ new (p5__WEBPACK_IMPORTED_MODULE_0___default())(project);
 
 /******/ })()
 ;
-//# sourceMappingURL=sketch.cd6d8461.map
+//# sourceMappingURL=sketch.23b6293c.map
